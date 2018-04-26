@@ -1,0 +1,3 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+customer_read_all,customer all,model_tr_take_customer,group_manager,1,0,0,0
+project_read_all,customer all,model_tr_project,group_manager,1,0,0,0

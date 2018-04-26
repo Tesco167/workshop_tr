@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="wizard_form_view_1">
+            <field name="name">wizard.form</field>
+            <field name="model">tranfer.date.amount.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Add Attendees">
+                    <group>
+                        <field name="visit_date"/>
+                        <field name="amount"/>
+                    </group>
+                    <footer>
+                        <button name="tranfer_date_amount" type="object"
+                                string="Update" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="launch_tranferdateamount_wizard"
+                    name="Add Attendees"
+                    res_model="tranfer.date.amount.wizard"
+                    view_mode="form"
+                    view_id="wizard_form_view_1"
+                    target="new"/>
+    </data>
+</odoo>

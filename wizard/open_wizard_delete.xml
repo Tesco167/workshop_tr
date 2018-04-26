@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="wizard_form_view">
+            <field name="name">wizard.form</field>
+            <field name="model">delete.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Add Attendees">
+                    <group>
+                        <field name="customer_ids">
+                            <tree string="Course Tree">
+                                <field name="customer_id"/>
+                                <field name="amount"/>
+                                <field name="state"/>
+                            </tree>
+                        </field>>
+                    </group>
+                    <footer>
+                        <button name="delete_cutomer" type="object"
+                                string="Delete" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="launch_session_wizard"
+                    name="Add Attendees"
+                    res_model="delete.wizard"
+                    view_id="wizard_form_view"
+                    view_mode="form"
+                    target="new"/>
+    </data>
+</odoo>

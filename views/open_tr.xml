@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="cusomer_form" model="ir.ui.view">
+            <field name="name">customer.form</field>
+            <field name="model">tr.take.customer</field>
+            <field name="arch" type="xml">
+                <form string="Customer">
+                    <header>
+                        <button string="Request for approve" type="object" name="request_progressbar" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                        <button string="Approve" type="object" name="approve_progressbar" attrs="{'invisible': [('state','!=','wait')]}"/>
+                        <button string="Reject" type="object" name="reject_progressbar" attrs="{'invisible': [('state','!=','wait')]}"/>
+                        <button name="%(launch_tranferdateamount_wizard)d" string="Change" type="action" />
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet string="">
+                        <group>
+                            <field name="visit_date"/>
+                            <field name="customer_id"/>
+                            <field name="tr_project_id"/>
+                            <field name="balance"/>
+                            <field name="amount"/>
+                            <field name="sales_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="Project_form" model="ir.ui.view">
+            <field name="name">Project.form</field>
+            <field name="model">tr.project</field>
+            <field name="arch" type="xml">
+                <form string="Project">
+                    <sheet string="Project">
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="budget"/>
+                            <field name="balance"/>
+                            <field name="progress_balance" widget="progressbar"/>
+                            <field name="customer_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="project_tree_view">
+            <field name="name">project.tree</field>
+            <field name="model">tr.project</field>
+            <field name="arch" type="xml">
+                <tree string="Project Tree">
+                    <field name="name"/>
+                    <field name="budget"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="course_tree_view">
+            <field name="name">course.tree</field>
+            <field name="model">tr.take.customer</field>
+            <field name="arch" type="xml">
+                <tree string="Course Tree">
+                    <field name="customer_id"/>
+                    <field name="visit_date"/>
+                    <field name="amount"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="customer_list">
+            <field name="name">Customer List</field>
+            <field name="res_model">tr.take.customer</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Customer List
+                </p>
+            </field>
+        </record>
+
+         <record model="ir.actions.act_window" id="project_list">
+            <field name="name">Project List</field>
+            <field name="res_model">tr.project</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Project List
+                </p>
+            </field>
+        </record>
+
+        <!-- top level menu: no parent -->
+        <menuitem id="tr_menu" name="TR"/>
+        <!-- A first level in the left side menu is needed
+             before using action= attribute -->
+                <menuitem id="project_menu" name="Project"
+                  parent="tr_menu"
+                  action="project_list"/>
+
+                <menuitem id="customer_menu" name="Customer"
+                  parent="tr_menu"
+                  action="customer_list"/>
+
+                <menuitem id="delete_menu" name="Delete"
+                  parent="tr_menu"
+                  action="launch_session_wizard"/>
+
+                <menuitem id="mark_done_menu" name="Mark Approve as Done"
+                  parent="tr_menu"
+                  action="launch_mark_done_wizard"/>
+    </data>
+</odoo>
